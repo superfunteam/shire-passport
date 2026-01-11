@@ -120,7 +120,7 @@ export default function ExportTemplate() {
                   style={{
                     width: '100%',
                     aspectRatio: '1',
-                    borderRadius: '50% 50% 18% 18%',
+                    borderRadius: '50% 50% 24% 24%',
                     border: '12px solid white',
                     overflow: 'hidden',
                     opacity: isClaimed ? 1 : 0.35,
@@ -193,7 +193,7 @@ export default function ExportTemplate() {
                   style={{
                     width: '100%',
                     aspectRatio: '1',
-                    borderRadius: '50% 50% 18% 18%',
+                    borderRadius: '50% 50% 24% 24%',
                     border: isClaimed ? '3px solid #d4af37' : '3px solid white',
                     overflow: 'hidden',
                     opacity: isClaimed ? 1 : 0.35,

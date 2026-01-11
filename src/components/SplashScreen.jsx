@@ -13,14 +13,18 @@ export default function SplashScreen() {
       animate="animate"
       exit="exit"
     >
-      {/* Decorative ring illustration placeholder */}
+      {/* Ring badge in Gowalla style */}
       <motion.div
-        className="w-48 h-48 mb-8 rounded-full border-8 border-gold-500 flex items-center justify-center bg-parchment-200"
+        className="w-48 h-48 mb-8 badge-image-container overflow-hidden"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ ...springs.bouncy, delay: 0.2 }}
       >
-        <span className="text-6xl">💍</span>
+        <img
+          src="/images/ring-badge.png"
+          alt="The One Ring"
+          className="w-full h-full object-cover"
+        />
       </motion.div>
 
       {/* Title */}

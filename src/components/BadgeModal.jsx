@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../context/AppContext';
-import { BADGE_TYPES } from '../data/badges';
-import { slideUpModal, backdrop, springs, celebrate } from '../utils/animations';
+import { BADGE_TYPES, getPrimaryBadges, getSecretBadges } from '../data/badges';
+import { slideUpModal, backdrop, springs } from '../utils/animations';
 
 // Badge type labels
 const typeLabels = {
@@ -30,17 +30,80 @@ export default function BadgeModal() {
   const {
     selectedBadge,
     closeBadgeModal,
+    openBadgeModal,
     badges,
     claimBadge,
     getClaimTime,
     honorSystemDismissed,
     dismissHonorSystem,
     play,
+    isSecretUnlocked,
   } = useApp();
 
   const [showHonorSystem, setShowHonorSystem] = useState(false);
   const [dontAskAgain, setDontAskAgain] = useState(false);
   const [justClaimed, setJustClaimed] = useState(false);
+  const [slideDirection, setSlideDirection] = useState(0);
+
+  // Get navigable badges (primary + unlocked secrets)
+  const primaryBadges = getPrimaryBadges();
+  const secretBadges = getSecretBadges();
+  const unlockedSecrets = secretBadges.filter(b => badges[b.id]?.claimed);
+  const navigableBadges = [...primaryBadges, ...unlockedSecrets];
+
+  // Find current badge index
+  const currentIndex = selectedBadge
+    ? navigableBadges.findIndex(b => b.id === selectedBadge.id)
+    : -1;
+
+  // Navigation functions
+  const goToPrevBadge = useCallback(() => {
+    if (currentIndex > 0) {
+      setSlideDirection(1);
+      setShowHonorSystem(false);
+      setJustClaimed(false);
+      openBadgeModal(navigableBadges[currentIndex - 1]);
+    }
+  }, [currentIndex, navigableBadges, openBadgeModal]);
+
+  const goToNextBadge = useCallback(() => {
+    if (currentIndex < navigableBadges.length - 1) {
+      setSlideDirection(-1);
+      setShowHonorSystem(false);
+      setJustClaimed(false);
+      openBadgeModal(navigableBadges[currentIndex + 1]);
+    }
+  }, [currentIndex, navigableBadges, openBadgeModal]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!selectedBadge) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToPrevBadge();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToNextBadge();
+      } else if (e.key === 'Escape') {
+        closeBadgeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedBadge, goToPrevBadge, goToNextBadge, closeBadgeModal]);
+
+  // Swipe handling
+  const handleDragEnd = (e, info) => {
+    const swipeThreshold = 50;
+    if (info.offset.x > swipeThreshold) {
+      goToPrevBadge();
+    } else if (info.offset.x < -swipeThreshold) {
+      goToNextBadge();
+    }
+  };
 
   if (!selectedBadge) return null;
 
@@ -78,6 +141,22 @@ export default function BadgeModal() {
     performClaim();
   };
 
+  // Animation variants for badge content sliding
+  const contentVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? -300 : 300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+  };
+
   return (
     <AnimatePresence>
       {selectedBadge && (
@@ -94,14 +173,28 @@ export default function BadgeModal() {
 
           {/* Modal */}
           <motion.div
-            className="modal-content"
+            className="modal-content overflow-hidden"
             variants={slideUpModal}
             initial="initial"
             animate="animate"
             exit="exit"
             transition={springs.smooth}
           >
-            <div className="p-6">
+            <AnimatePresence mode="wait" custom={slideDirection}>
+              <motion.div
+                key={selectedBadge.id}
+                custom={slideDirection}
+                variants={contentVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={handleDragEnd}
+                className="p-6"
+              >
               {/* Close button */}
               <button
                 className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-earth-400 hover:text-earth-600"
@@ -155,9 +248,18 @@ export default function BadgeModal() {
               </h2>
 
               {/* Badge description */}
-              <p className="font-body text-earth-600 text-center mb-6 leading-relaxed">
+              <p className="font-body text-earth-600 text-center mb-4 leading-relaxed">
                 {selectedBadge.longDesc}
               </p>
+
+              {/* Instruction callout */}
+              {selectedBadge.instruction && !isClaimed && !justClaimed && (
+                <div className="bg-shire-100 border border-shire-200 rounded-button px-8 py-4 mb-6">
+                  <p className="font-display text-shire-800 text-center text-lg font-semibold">
+                    {selectedBadge.instruction}
+                  </p>
+                </div>
+              )}
 
               {/* Claim status or button */}
               {!showHonorSystem && (
@@ -198,7 +300,10 @@ export default function BadgeModal() {
                     exit={{ opacity: 0, y: 10 }}
                     className="bg-parchment-200 rounded-card p-4"
                   >
-                    <p className="font-body text-earth-700 text-sm mb-4">
+                    <p
+                      className="text-earth-700 text-sm mb-4"
+                      style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+                    >
                       The Shire Passport operates on the honor system. By claiming
                       this badge, you solemnly swear you have witnessed this moment
                       (or eaten this meal).
@@ -211,7 +316,10 @@ export default function BadgeModal() {
                         onChange={(e) => setDontAskAgain(e.target.checked)}
                         className="w-5 h-5 rounded border-earth-400 text-shire-500 focus:ring-shire-500"
                       />
-                      <span className="font-body text-sm text-earth-600">
+                      <span
+                        className="text-sm text-earth-600"
+                        style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+                      >
                         Don't ask me again
                       </span>
                     </label>
@@ -235,7 +343,8 @@ export default function BadgeModal() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
         </>
       )}
