@@ -1,0 +1,37 @@
+import { AnimatePresence } from 'framer-motion';
+import { AppProvider, useApp, SCREENS } from './context/AppContext';
+import SplashScreen from './components/SplashScreen';
+import NameModal from './components/NameModal';
+import ExplainerModal from './components/ExplainerModal';
+import Passport from './components/Passport';
+import BadgeModal from './components/BadgeModal';
+import CertificationModal from './components/CertificationModal';
+import SecretUnlockModal from './components/SecretUnlockModal';
+
+function AppContent() {
+  const { currentScreen } = useApp();
+
+  return (
+    <div className="app-container bg-parchment-100">
+      <AnimatePresence mode="wait">
+        {currentScreen === SCREENS.SPLASH && <SplashScreen key="splash" />}
+        {currentScreen === SCREENS.NAME && <NameModal key="name" />}
+        {currentScreen === SCREENS.EXPLAINER && <ExplainerModal key="explainer" />}
+        {currentScreen === SCREENS.PASSPORT && <Passport key="passport" />}
+      </AnimatePresence>
+
+      {/* Modals */}
+      <BadgeModal />
+      <CertificationModal />
+      <SecretUnlockModal />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
+  );
+}

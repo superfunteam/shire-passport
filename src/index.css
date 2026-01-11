@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Prevent overscroll bounce on iOS */
+  html, body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Safe area insets for notched devices */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Smoother font rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Prevent text selection on badges */
+  .badge-card {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  /* Chunky button style */
+  .btn-primary {
+    @apply px-8 py-4 bg-shire-500 text-parchment-100 font-display font-semibold text-lg rounded-button shadow-button;
+    @apply hover:bg-shire-600 active:scale-95 transition-all duration-150;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-parchment-200 text-earth-700 font-display font-medium rounded-button border border-parchment-400;
+    @apply hover:bg-parchment-300 active:scale-95 transition-all duration-150;
+  }
+
+  /* Card style */
+  .card {
+    @apply bg-parchment-50 rounded-card shadow-card p-4;
+  }
+
+  /* Modal backdrop */
+  .modal-backdrop {
+    @apply fixed inset-0 bg-earth-900/60 backdrop-blur-sm z-40;
+  }
+
+  /* Modal content */
+  .modal-content {
+    @apply fixed bottom-0 left-0 right-0 bg-parchment-50 rounded-t-modal shadow-modal z-50 max-h-[90vh] overflow-y-auto;
+  }
+
+  /* App container with max-width for desktop */
+  .app-container {
+    @apply max-w-md mx-auto min-h-screen relative;
+  }
+
+  /* Gowalla-style badge image container */
+  .badge-image-container {
+    /* Fully rounded top corners, slightly rounded bottom */
+    border-radius: 50% 50% 18% 18%;
+    /* Thick white stroke */
+    border: 12px solid white;
+    /* Heavy drop shadow */
+    box-shadow:
+      0 4px 8px rgba(31, 26, 19, 0.25),
+      0 2px 4px rgba(31, 26, 19, 0.15);
+  }
+
+  /* Badge image wrapper for positioning */
+  .badge-image-wrapper {
+    filter: drop-shadow(0 3px 6px rgba(31, 26, 19, 0.2));
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar but allow scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
