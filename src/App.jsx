@@ -7,6 +7,7 @@ import Passport from './components/Passport';
 import BadgeModal from './components/BadgeModal';
 import CertificationModal from './components/CertificationModal';
 import SecretUnlockModal from './components/SecretUnlockModal';
+import RainEffect from './components/RainEffect';
 
 function AppContent() {
   const { currentScreen } = useApp();
@@ -32,6 +33,7 @@ export default function App() {
   return (
     <AppProvider>
       <AppContent />
+      <RainEffect />
     </AppProvider>
   );
 }
