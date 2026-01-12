@@ -52,13 +52,13 @@ export default function NameModal() {
   const handleContinue = () => {
     const finalName = inputValue.trim() || DEFAULT_NAME;
     setName(finalName);
-    goToScreen(SCREENS.EXPLAINER);
+    goToScreen(SCREENS.LOADING);
   };
 
   const handleSkip = () => {
     play('snap');
     setName(DEFAULT_NAME);
-    goToScreen(SCREENS.EXPLAINER);
+    goToScreen(SCREENS.LOADING);
   };
 
   const handleKeyDown = (e) => {
@@ -96,7 +96,6 @@ export default function NameModal() {
             onKeyDown={handleKeyDown}
             placeholder="Enter your name..."
             className="w-full px-5 py-4 text-xl font-body text-earth-800 bg-parchment-50 border-2 border-parchment-400 rounded-button focus:border-shire-500 focus:outline-none transition-colors"
-            autoFocus
             autoCapitalize="words"
             autoComplete="off"
           />

@@ -15,7 +15,7 @@ export const badges = [
     shortDesc: 'The first meal of the day',
     longDesc: 'The most important meal in the Shire. One cannot simply begin a quest on an empty stomach.',
     instruction: 'Eat breakfast to claim this badge.',
-    image: '/images/badge-breakfast.png',
+    image: '/images/badge-breakfast.webp',
     order: 1,
   },
   {
@@ -26,7 +26,7 @@ export const badges = [
     shortDesc: 'First film completed',
     longDesc: 'The journey begins. Witness the forming of the Fellowship and their departure from Rivendell.',
     instruction: 'Finish watching The Fellowship of the Ring to claim this badge.',
-    image: '/images/badge-fellowship.png',
+    image: '/images/badge-fellowship.webp',
     order: 2,
   },
   {
@@ -37,7 +37,7 @@ export const badges = [
     shortDesc: 'What about second breakfast?',
     longDesc: 'What about second breakfast? A true hobbit never forgets. Pippin would be proud.',
     instruction: 'Eat second breakfast to claim this badge.',
-    image: '/images/badge-second-breakfast.png',
+    image: '/images/badge-second-breakfast.webp',
     order: 3,
   },
   {
@@ -48,7 +48,7 @@ export const badges = [
     shortDesc: 'Frodo accepts the quest',
     longDesc: 'In the House of Elrond, a small voice changes the fate of Middle-earth. "I will take the Ring to Mordor. Though... I do not know the way."',
     instruction: 'Watch this scene to claim this badge.',
-    image: '/images/badge-i-will-take-it.png',
+    image: '/images/badge-i-will-take-it.webp',
     order: 4,
   },
   {
@@ -59,7 +59,7 @@ export const badges = [
     shortDesc: 'A light refreshment',
     longDesc: 'A light refreshment to bridge the gap between second breakfast and luncheon. The Shire approves of your dedication.',
     instruction: 'Eat elevenses to claim this badge.',
-    image: '/images/badge-elevenses.png',
+    image: '/images/badge-elevenses.webp',
     order: 5,
   },
   {
@@ -70,7 +70,7 @@ export const badges = [
     shortDesc: 'Gandalf faces the Balrog',
     longDesc: 'Upon the Bridge of Khazad-dûm, Gandalf the Grey makes his stand against shadow and flame. "You. Shall. Not. Pass!"',
     instruction: 'Watch this scene to claim this badge.',
-    image: '/images/badge-you-shall-not-pass.png',
+    image: '/images/badge-you-shall-not-pass.webp',
     order: 6,
   },
   {
@@ -81,7 +81,7 @@ export const badges = [
     shortDesc: 'A proper sit-down meal',
     longDesc: 'A proper sit-down meal, as is right and proper. Even Samwise Gamgee would be proud of your commitment to hobbit tradition.',
     instruction: 'Eat luncheon to claim this badge.',
-    image: '/images/badge-luncheon.png',
+    image: '/images/badge-luncheon.webp',
     order: 7,
   },
   {
@@ -92,7 +92,7 @@ export const badges = [
     shortDesc: 'Second film completed',
     longDesc: 'The fellowship is broken, but the story continues. Endure the second chapter and witness the Battle of Helm\'s Deep.',
     instruction: 'Finish watching The Two Towers to claim this badge.',
-    image: '/images/badge-two-towers.png',
+    image: '/images/badge-two-towers.webp',
     order: 8,
   },
   {
@@ -103,7 +103,7 @@ export const badges = [
     shortDesc: 'Gollum argues with himself',
     longDesc: 'Witness the tortured soul of Sméagol as he wages war against himself. Two minds, one wretched creature. "We wants it. We needs it. Must have the precious."',
     instruction: 'Watch this scene to claim this badge.',
-    image: '/images/badge-my-precious.png',
+    image: '/images/badge-my-precious.webp',
     order: 9,
   },
   {
@@ -114,7 +114,7 @@ export const badges = [
     shortDesc: 'Tea and sustenance',
     longDesc: 'A civilized pause for tea and sustenance. You\'ve earned it, precious. Yes, you have.',
     instruction: 'Eat afternoon tea to claim this badge.',
-    image: '/images/badge-afternoon-tea.png',
+    image: '/images/badge-afternoon-tea.webp',
     order: 10,
   },
   {
@@ -125,7 +125,7 @@ export const badges = [
     shortDesc: 'Treebeard marches on Isengard',
     longDesc: 'The shepherds of the forest have reached a decision. The Ents march on Isengard. "There is no curse in Elvish, Entish, or the tongues of Men for this treachery."',
     instruction: 'Watch this scene to claim this badge.',
-    image: '/images/badge-ents-go-to-war.png',
+    image: '/images/badge-ents-go-to-war.webp',
     order: 11,
   },
   {
@@ -136,7 +136,7 @@ export const badges = [
     shortDesc: 'The main evening feast',
     longDesc: 'The main evening feast. Refuel for the final push to Mount Doom. The end is in sight, but there is still far to go.',
     instruction: 'Eat dinner to claim this badge.',
-    image: '/images/badge-dinner.png',
+    image: '/images/badge-dinner.webp',
     order: 12,
   },
   {
@@ -147,7 +147,7 @@ export const badges = [
     shortDesc: 'Final film completed',
     longDesc: 'The final chapter. Commit to seeing this through to the very end. All endings are also beginnings.',
     instruction: 'Finish watching The Return of the King to claim this badge.',
-    image: '/images/badge-return-king.png',
+    image: '/images/badge-return-king.webp',
     order: 13,
   },
   {
@@ -158,7 +158,7 @@ export const badges = [
     shortDesc: 'Gondor calls for aid',
     longDesc: 'Gondor calls for aid! Witness the flame pass from peak to peak across the realm of men. "The beacons are lit! Gondor calls for aid!"',
     instruction: 'Watch this scene to claim this badge.',
-    image: '/images/badge-beacons-are-lit.png',
+    image: '/images/badge-beacons-are-lit.webp',
     order: 14,
   },
   {
@@ -169,7 +169,7 @@ export const badges = [
     shortDesc: 'Éowyn defeats the Witch-king',
     longDesc: 'The Witch-king of Angmar meets his doom. "No man can kill me." "I am no man." The prophecy is fulfilled.',
     instruction: 'Watch this scene to claim this badge.',
-    image: '/images/badge-i-am-no-man.png',
+    image: '/images/badge-i-am-no-man.webp',
     order: 15,
   },
   {
@@ -180,7 +180,7 @@ export const badges = [
     shortDesc: 'The final meal',
     longDesc: 'The seventh and final meal of a long day\'s journey. You have eaten as the hobbits eat. The Shire is proud of your appetite.',
     instruction: 'Eat supper to claim this badge.',
-    image: '/images/badge-supper.png',
+    image: '/images/badge-supper.webp',
     order: 16,
   },
 
@@ -191,7 +191,7 @@ export const badges = [
     name: 'There and Back Again',
     shortDesc: 'All movies completed',
     longDesc: 'You have walked the full path from Bag End to Mount Doom and home again. Bilbo Baggins himself would tip his hat to your endurance.',
-    image: '/images/badge-secret-movies.png',
+    image: '/images/badge-secret-movies.webp',
     order: 17,
     unlockCondition: {
       type: 'all',
@@ -204,7 +204,7 @@ export const badges = [
     name: 'Second Breakfast Champion',
     shortDesc: 'All meals consumed',
     longDesc: 'Seven meals. All consumed. You have achieved the highest honor in hobbit society. Your dedication to culinary tradition is unmatched in all the Shire.',
-    image: '/images/badge-secret-meals.png',
+    image: '/images/badge-secret-meals.webp',
     order: 18,
     unlockCondition: {
       type: 'all',
@@ -217,7 +217,7 @@ export const badges = [
     name: 'Loremaster',
     shortDesc: 'All key scenes witnessed',
     longDesc: 'A true scholar of Middle-earth. You witnessed every pivotal moment in the tale. The Red Book of Westmarch shall record your attentiveness.',
-    image: '/images/badge-secret-scenes.png',
+    image: '/images/badge-secret-scenes.webp',
     order: 19,
     unlockCondition: {
       type: 'all',
@@ -230,7 +230,7 @@ export const badges = [
     name: 'Ringbearer',
     shortDesc: 'The ultimate achievement',
     longDesc: 'You bore the weight of this quest to the very end. The fate of Middle-earth was in your hands, and you did not falter. Even the smallest person can change the course of the future.',
-    image: '/images/badge-secret-ringbearer.png',
+    image: '/images/badge-secret-ringbearer.webp',
     order: 20,
     unlockCondition: {
       type: 'all',

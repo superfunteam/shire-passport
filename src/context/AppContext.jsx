@@ -9,6 +9,7 @@ const AppContext = createContext(null);
 export const SCREENS = {
   SPLASH: 'splash',
   NAME: 'name',
+  LOADING: 'loading',
   EXPLAINER: 'explainer',
   PASSPORT: 'passport',
 };
@@ -67,8 +68,10 @@ export function AppProvider({ children }) {
   );
 
   // Navigation helpers
-  const goToScreen = useCallback((screen) => {
-    play(UI_SOUNDS.buttonTap);
+  const goToScreen = useCallback((screen, options = {}) => {
+    if (!options.silent) {
+      play(UI_SOUNDS.buttonTap);
+    }
     setCurrentScreen(screen);
   }, [play]);
 
