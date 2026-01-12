@@ -74,7 +74,7 @@ export default function BadgeModal() {
           // Now start the floating animation
           setIsFloatingVisible(true);
         }
-      }, 280); // Wait for modal spring animation to fully settle
+      }, 400); // Wait for modal spring animation to fully settle
 
       return () => clearTimeout(timer);
     } else if (isClosingBadgeModal && badgeOriginRect) {
@@ -282,7 +282,7 @@ export default function BadgeModal() {
                   // Instant opacity change - no animation to avoid flicker during handoff
                   opacity: showModalBadge || !badgeOriginRect ? 1 : 0,
                 }}
-                initial={{ scale: 0.8 }}
+                initial={badgeOriginRect ? false : { scale: 0.8 }}
                 animate={justClaimed
                   ? { scale: [1, 1.1, 0.95, 1.05, 1], rotate: [0, -3, 3, -1, 0] }
                   : { scale: 1 }
