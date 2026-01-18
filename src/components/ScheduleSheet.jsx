@@ -22,7 +22,7 @@ function parseTimeToMinutes(timeStr) {
 
 // Day boundaries in minutes from midnight
 const DAY_START = 9 * 60; // 9am = 540 minutes
-const DAY_END = 20 * 60 + 30; // 8:30pm = 1230 minutes
+const DAY_END = 20 * 60 + 16; // 8:16pm = 1216 minutes (end of Return of the King)
 const DAY_DURATION = DAY_END - DAY_START;
 
 // Get current progress through the day (0-100)
@@ -212,7 +212,7 @@ export default function ScheduleSheet() {
                   className="absolute top-0 origin-top z-0"
                   style={{ left: '17px', width: '6px', backgroundColor: '#7C3AED' }}
                   initial={{ height: 0 }}
-                  animate={{ height: `${dayProgress}%` }}
+                  animate={{ height: `calc(${dayProgress}% + 4rem)` }}
                   transition={{ duration: 0.5, ease: 'easeOut' }}
                 />
 
@@ -220,7 +220,7 @@ export default function ScheduleSheet() {
                 {dayProgress > 0 && dayProgress < 100 && (
                   <motion.div
                     className="absolute -translate-y-1/2 z-20"
-                    style={{ top: `${dayProgress}%`, left: '10px', width: '21px', height: '21px' }}
+                    style={{ top: `calc(${dayProgress}% + 4rem)`, left: '10px', width: '21px', height: '21px' }}
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={springs.bouncy}
