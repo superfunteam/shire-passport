@@ -22,7 +22,7 @@ function parseTimeToMinutes(timeStr) {
 
 // Day boundaries in minutes from midnight
 const DAY_START = 9 * 60; // 9am = 540 minutes
-const DAY_END = 20 * 60 + 30; // 8:30pm = 1230 minutes
+const DAY_END = 20 * 60 + 16; // 8:16pm = 1216 minutes (end of Return of the King)
 const DAY_DURATION = DAY_END - DAY_START;
 
 // Get current progress through the day (0-100)
