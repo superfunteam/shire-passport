@@ -37,8 +37,10 @@ function getDayProgress() {
 }
 
 // Get badge position on the timeline (0-100)
+// For movies, use startTime to show when they begin; for other badges, use time
 function getBadgePosition(badge) {
-  const badgeMinutes = parseTimeToMinutes(badge.time);
+  const timeToUse = badge.type === BADGE_TYPES.MOVIE && badge.startTime ? badge.startTime : badge.time;
+  const badgeMinutes = parseTimeToMinutes(timeToUse);
   if (badgeMinutes < DAY_START) return 0;
   if (badgeMinutes > DAY_END) return 100;
   return ((badgeMinutes - DAY_START) / DAY_DURATION) * 100;
@@ -279,7 +281,7 @@ export default function ScheduleSheet() {
                               color: isClaimed ? '#9CA3AF' : '#78716C'
                             }}
                           >
-                            {formatTime(badge.time)}
+                            {formatTime(badge.type === BADGE_TYPES.MOVIE && badge.startTime ? badge.startTime : badge.time)}
                           </span>
                           <p
                             className={`text-sm font-medium truncate ${
