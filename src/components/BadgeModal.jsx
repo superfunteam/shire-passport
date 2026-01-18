@@ -291,7 +291,7 @@ export default function BadgeModal() {
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.2}
                 onDragEnd={handleDragEnd}
-                className="p-6 pb-8"
+                className="p-6 pb-20"
               >
               {/* Close button */}
               <button
