@@ -220,7 +220,7 @@ export default function ScheduleSheet() {
                 {dayProgress > 0 && dayProgress < 100 && (
                   <motion.div
                     className="absolute -translate-y-1/2 z-20"
-                    style={{ top: `${dayProgress}%`, left: '10px', width: '21px', height: '21px' }}
+                    style={{ top: `calc(${dayProgress}% + 2rem)`, left: '10px', width: '21px', height: '21px' }}
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={springs.bouncy}
