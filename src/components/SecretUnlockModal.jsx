@@ -121,6 +121,19 @@ export default function SecretUnlockModal() {
                 transition={{ delay: 0.6 }}
               >
                 {secretUnlockModal.longDesc}
+                {secretUnlockModal.id === 'secret-movies' && (
+                  <span
+                    style={{
+                      display: 'block',
+                      marginTop: '0.5rem',
+                      color: '#7C3AED',
+                      fontFamily: "'Google Sans Flex', sans-serif",
+                      fontWeight: 500,
+                    }}
+                  >
+                    The Pod salutes you!
+                  </span>
+                )}
               </motion.p>
 
               {/* Dismiss button */}
