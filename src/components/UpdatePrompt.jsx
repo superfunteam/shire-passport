@@ -3,6 +3,8 @@ import { useRegisterSW } from 'virtual:pwa-register/react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function UpdatePrompt() {
+  const [testMode, setTestMode] = useState(false);
+
   const {
     offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
@@ -21,20 +23,36 @@ export default function UpdatePrompt() {
     },
   });
 
+  // Check for ?update URL parameter to enable test mode
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('update')) {
+      setTestMode(true);
+    }
+  }, []);
+
   const close = () => {
     setOfflineReady(false);
     setNeedRefresh(false);
+    setTestMode(false);
   };
 
   const reload = () => {
-    updateServiceWorker(true);
+    if (testMode) {
+      // In test mode, just remove the param and reload
+      const url = new URL(window.location.href);
+      url.searchParams.delete('update');
+      window.location.href = url.toString();
+    } else {
+      updateServiceWorker(true);
+    }
   };
 
-  if (!needRefresh && !offlineReady) return null;
+  if (!needRefresh && !offlineReady && !testMode) return null;
 
   return (
     <AnimatePresence>
-      {(needRefresh || offlineReady) && (
+      {(needRefresh || offlineReady || testMode) && (
         <motion.div
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-sm px-4"
           initial={{ y: 100, opacity: 0 }}
@@ -47,10 +65,10 @@ export default function UpdatePrompt() {
               <div className="text-2xl">✨</div>
               <div className="flex-1">
                 <h3 className="font-display font-bold text-earth-800 mb-1">
-                  {needRefresh ? 'New Update Available!' : 'Ready for Offline Use'}
+                  {(needRefresh || testMode) ? 'New Update Available!' : 'Ready for Offline Use'}
                 </h3>
                 <p className="font-body text-sm text-earth-600 mb-3">
-                  {needRefresh ? (
+                  {(needRefresh || testMode) ? (
                     <>
                       A new version of the Shire Passport is ready. Reload to see the latest features!
                       <span className="block mt-2 text-xs text-earth-500">
@@ -62,7 +80,7 @@ export default function UpdatePrompt() {
                   )}
                 </p>
                 <div className="flex gap-2">
-                  {needRefresh && (
+                  {(needRefresh || testMode) && (
                     <button
                       className="btn-primary text-sm py-2 px-4"
                       onClick={reload}
@@ -74,7 +92,7 @@ export default function UpdatePrompt() {
                     className="btn-secondary text-sm py-2 px-4"
                     onClick={close}
                   >
-                    {needRefresh ? 'Later' : 'Dismiss'}
+                    {(needRefresh || testMode) ? 'Later' : 'Dismiss'}
                   </button>
                 </div>
               </div>
