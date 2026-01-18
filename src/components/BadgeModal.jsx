@@ -57,6 +57,9 @@ export default function BadgeModal() {
   const [justClaimed, setJustClaimed] = useState(false);
   const [slideDirection, setSlideDirection] = useState(0);
 
+  // Track badges claimed in current modal session to prevent immediate unclaiming
+  const claimedThisSessionRef = useRef(new Set());
+
   // Calculate target rect when modal opens and manage floating badge visibility
   useEffect(() => {
     if (selectedBadge && badgeOriginRect && !isClosingBadgeModal) {
@@ -94,6 +97,8 @@ export default function BadgeModal() {
       setTargetRect(null);
       setIsFloatingVisible(false);
       setShowModalBadge(false);
+      // Clear claimed-this-session tracking when modal closes
+      claimedThisSessionRef.current.clear();
     }
   }, [selectedBadge, badgeOriginRect, isClosingBadgeModal]);
 
@@ -211,6 +216,8 @@ export default function BadgeModal() {
     claimBadge(selectedBadge.id);
     setJustClaimed(true);
     setShowHonorSystem(false);
+    // Track that this badge was claimed in this modal session
+    claimedThisSessionRef.current.add(selectedBadge.id);
 
     if (dontAskAgain) {
       dismissHonorSystem();
@@ -392,25 +399,43 @@ export default function BadgeModal() {
                           backgroundColor: '#7C3AED',
                           color: 'white',
                           fontFamily: "'Google Sans Flex', sans-serif",
+                          opacity: claimedThisSessionRef.current.has(selectedBadge.id) ? 0.7 : 1,
+                          cursor: claimedThisSessionRef.current.has(selectedBadge.id) ? 'default' : 'pointer',
                         }}
                         onClick={() => {
-                          unclaimBadge(selectedBadge.id);
-                          setJustClaimed(false);
+                          // Prevent unclaiming if badge was claimed in this modal session
+                          if (!claimedThisSessionRef.current.has(selectedBadge.id)) {
+                            unclaimBadge(selectedBadge.id);
+                            setJustClaimed(false);
+                          }
                         }}
-                        whileHover={{ scale: 1.02, backgroundColor: '#6D28D9' }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={
+                          claimedThisSessionRef.current.has(selectedBadge.id)
+                            ? {}
+                            : { scale: 1.02, backgroundColor: '#6D28D9' }
+                        }
+                        whileTap={
+                          claimedThisSessionRef.current.has(selectedBadge.id)
+                            ? {}
+                            : { scale: 0.98 }
+                        }
                       >
                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         <span>Claimed</span>
                       </motion.button>
-                      {claimTime && (
+                      {claimTime && !claimedThisSessionRef.current.has(selectedBadge.id) && (
                         <p className="text-earth-500 text-xs mt-2">
                           Witnessed at {claimTime} • Tap to unclaim
                         </p>
                       )}
-                      {!claimTime && (
+                      {claimTime && claimedThisSessionRef.current.has(selectedBadge.id) && (
+                        <p className="text-earth-500 text-xs mt-2">
+                          Witnessed at {claimTime}
+                        </p>
+                      )}
+                      {!claimTime && !claimedThisSessionRef.current.has(selectedBadge.id) && (
                         <p className="text-earth-500 text-xs mt-2">
                           Tap to unclaim
                         </p>
