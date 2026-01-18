@@ -69,32 +69,22 @@ export default function SecretUnlockModal() {
               transition={springs.bouncy}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Sparkle decoration */}
-              <motion.div
-                className="text-5xl mb-4"
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ ...springs.bouncy, delay: 0.2 }}
-              >
-                ✨
-              </motion.div>
-
               {/* Header */}
               <motion.h2
-                className="font-display text-2xl font-bold text-gold-600 mb-4"
+                className="font-display text-2xl font-bold text-gold-600 mb-6"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.2 }}
               >
                 Secret Badge Unlocked!
               </motion.h2>
 
               {/* Badge image */}
               <motion.div
-                className="w-32 h-32 mx-auto mb-4 badge-image-container overflow-hidden"
+                className="w-64 h-64 mx-auto mb-6 badge-image-container-large overflow-hidden"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ ...springs.bouncy, delay: 0.4 }}
+                transition={{ ...springs.bouncy, delay: 0.3 }}
               >
                 <img
                   src={secretUnlockModal.image}
@@ -108,7 +98,7 @@ export default function SecretUnlockModal() {
                 className="font-display text-xl font-semibold text-earth-800 mb-2"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.4 }}
               >
                 {secretUnlockModal.name}
               </motion.h3>
@@ -118,7 +108,7 @@ export default function SecretUnlockModal() {
                 className="font-body text-earth-600 mb-6"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.5 }}
               >
                 {secretUnlockModal.longDesc}
                 {secretUnlockModal.id === 'secret-movies' && (
@@ -142,7 +132,7 @@ export default function SecretUnlockModal() {
                 onClick={closeSecretUnlockModal}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.7 }}
+                transition={{ delay: 0.6 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
