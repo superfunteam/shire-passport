@@ -119,6 +119,11 @@ export default function ScheduleSheet() {
 
   const primaryBadges = getPrimaryBadges();
 
+  // Sort badges by their timeline position (start time for movies, regular time for others)
+  const sortedBadges = [...primaryBadges].sort((a, b) => {
+    return getBadgePosition(a) - getBadgePosition(b);
+  });
+
   // Update progress every minute
   useEffect(() => {
     if (!showScheduleSheet) return;
@@ -240,7 +245,7 @@ export default function ScheduleSheet() {
 
                 {/* Schedule Items */}
                 <div className="space-y-4 ml-10">
-                  {primaryBadges.map((badge) => {
+                  {sortedBadges.map((badge) => {
                     const isClaimed = badges[badge.id]?.claimed;
                     const position = getBadgePosition(badge);
                     const isPast = position < dayProgress;
