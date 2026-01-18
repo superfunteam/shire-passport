@@ -139,6 +139,11 @@ export function AppProvider({ children }) {
     }
   }, [storage, play]);
 
+  const unclaimBadgeWithSound = useCallback((badgeId) => {
+    storage.unclaimBadge(badgeId);
+    play(UI_SOUNDS.buttonTap);
+  }, [storage, play]);
+
   const resetAndStartOver = useCallback(() => {
     storage.resetAll();
     setCurrentScreen(SCREENS.SPLASH);
@@ -148,6 +153,7 @@ export function AppProvider({ children }) {
     // Storage
     ...storage,
     claimBadge: claimBadgeWithSound,
+    unclaimBadge: unclaimBadgeWithSound,
 
     // Sound
     play,
