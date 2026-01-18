@@ -109,6 +109,21 @@ export default function FirstMovieModal() {
                 (JK Tom, thanks for the sheet!)
               </motion.p>
 
+              {/* Luncheon call to action */}
+              <motion.p
+                className="mb-4"
+                style={{
+                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontWeight: 700,
+                  color: '#7C3AED'
+                }}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.55 }}
+              >
+                And with that, let's luncheon!
+              </motion.p>
+
               {/* LotR joke */}
               <motion.p
                 className="font-body text-earth-700 italic mb-6 text-sm border-t border-earth-200 pt-4"
