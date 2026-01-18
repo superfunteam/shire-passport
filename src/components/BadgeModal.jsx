@@ -34,6 +34,7 @@ export default function BadgeModal() {
     openBadgeModal,
     badges,
     claimBadge,
+    unclaimBadge,
     getClaimTime,
     honorSystemDismissed,
     dismissHonorSystem,
@@ -372,22 +373,33 @@ export default function BadgeModal() {
                 <>
                   {isClaimed || justClaimed ? (
                     <div className="text-center">
-                      <div
+                      <motion.button
                         className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-button shadow-button"
                         style={{
                           backgroundColor: '#7C3AED',
                           color: 'white',
                           fontFamily: "'Google Sans Flex', sans-serif",
                         }}
+                        onClick={() => {
+                          unclaimBadge(selectedBadge.id);
+                          setJustClaimed(false);
+                        }}
+                        whileHover={{ scale: 1.02, backgroundColor: '#6D28D9' }}
+                        whileTap={{ scale: 0.98 }}
                       >
                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         <span>Claimed</span>
-                      </div>
+                      </motion.button>
                       {claimTime && (
-                        <p className="text-earth-500 text-sm mt-2">
-                          Witnessed at {claimTime}
+                        <p className="text-earth-500 text-xs mt-2">
+                          Witnessed at {claimTime} • Tap to unclaim
+                        </p>
+                      )}
+                      {!claimTime && (
+                        <p className="text-earth-500 text-xs mt-2">
+                          Tap to unclaim
                         </p>
                       )}
                     </div>
