@@ -65,25 +65,29 @@ export default function FirstMovieModal() {
               transition={springs.bouncy}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Sparkle decoration */}
-              <motion.div
-                className="text-5xl mb-4"
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ ...springs.bouncy, delay: 0.2 }}
-              >
-                🎉
-              </motion.div>
-
               {/* Header */}
               <motion.h2
                 className="font-display text-2xl font-bold text-gold-600 mb-4"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.2 }}
               >
                 One down, babyyy!
               </motion.h2>
+
+              {/* Badge image */}
+              <motion.div
+                className="w-32 h-32 mx-auto mb-4 badge-image-container overflow-hidden"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ ...springs.bouncy, delay: 0.3 }}
+              >
+                <img
+                  src="/images/badge-intermission-bagel.webp"
+                  alt="Intermission Bagel"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
 
               {/* Body text */}
               <motion.p
@@ -97,12 +101,22 @@ export default function FirstMovieModal() {
 
               {/* Smaller text below */}
               <motion.p
-                className="font-body text-earth-500 text-sm mb-6"
+                className="font-body text-earth-500 text-sm mb-4"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
                 (JK Tom, thanks for the sheet!)
+              </motion.p>
+
+              {/* LotR joke */}
+              <motion.p
+                className="font-body text-earth-700 italic mb-6 text-sm border-t border-earth-200 pt-4"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                "Even the very wise cannot see all ends. Take your intermission—the road goes ever on and on, and you'll need your strength for The Two Towers!"
               </motion.p>
 
               {/* Dismiss button */}
@@ -111,7 +125,7 @@ export default function FirstMovieModal() {
                 onClick={closeFirstMovieModal}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.7 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
