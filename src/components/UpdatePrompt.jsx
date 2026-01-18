@@ -36,13 +36,13 @@ export default function UpdatePrompt() {
     <AnimatePresence>
       {(needRefresh || offlineReady) && (
         <motion.div
-          className="fixed inset-x-0 bottom-6 z-[100] flex justify-center px-4"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-sm px-4"
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
-          <div className="bg-parchment-50 rounded-modal shadow-modal border-2 border-gold-400 p-4 w-full max-w-sm">
+          <div className="bg-parchment-50 rounded-modal shadow-modal border-2 border-gold-400 p-4 w-full">
             <div className="flex items-start gap-3">
               <div className="text-2xl">✨</div>
               <div className="flex-1">
