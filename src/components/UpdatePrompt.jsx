@@ -50,9 +50,16 @@ export default function UpdatePrompt() {
                   {needRefresh ? 'New Update Available!' : 'Ready for Offline Use'}
                 </h3>
                 <p className="font-body text-sm text-earth-600 mb-3">
-                  {needRefresh
-                    ? 'A new version of the Shire Passport is ready. Reload to see the latest features!'
-                    : 'The app is ready to work offline.'}
+                  {needRefresh ? (
+                    <>
+                      A new version of the Shire Passport is ready. Reload to see the latest features!
+                      <span className="block mt-2 text-xs text-earth-500">
+                        After reloading, try unclaiming and reclaiming your Fellowship badge to see the new intermission celebration!
+                      </span>
+                    </>
+                  ) : (
+                    'The app is ready to work offline.'
+                  )}
                 </p>
                 <div className="flex gap-2">
                   {needRefresh && (
