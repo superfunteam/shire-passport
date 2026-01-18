@@ -10,6 +10,7 @@ import CertificationModal from './components/CertificationModal';
 import SecretUnlockModal from './components/SecretUnlockModal';
 import FirstMovieModal from './components/FirstMovieModal';
 import ScheduleSheet from './components/ScheduleSheet';
+import UpdatePrompt from './components/UpdatePrompt';
 import RainEffect from './components/RainEffect';
 
 function AppContent() {
@@ -39,6 +40,7 @@ export default function App() {
   return (
     <AppProvider>
       <AppContent />
+      <UpdatePrompt />
       <RainEffect />
     </AppProvider>
   );
