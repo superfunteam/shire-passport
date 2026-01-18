@@ -548,12 +548,11 @@ export default function BadgeModal() {
                   <motion.img
                     src={selectedBadge.image}
                     alt={selectedBadge.name}
-                    className="max-w-full max-h-full object-contain"
+                    className="max-w-full max-h-full object-contain cursor-pointer"
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.8, opacity: 0 }}
                     transition={springs.smooth}
-                    onClick={(e) => e.stopPropagation()}
                   />
                 </motion.div>
               </>
