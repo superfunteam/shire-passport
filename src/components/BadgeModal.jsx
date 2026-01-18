@@ -56,6 +56,7 @@ export default function BadgeModal() {
   const [dontAskAgain, setDontAskAgain] = useState(false);
   const [justClaimed, setJustClaimed] = useState(false);
   const [slideDirection, setSlideDirection] = useState(0);
+  const [isImageZoomed, setIsImageZoomed] = useState(false);
 
   // Track badges claimed in current modal session to prevent immediate unclaiming
   const claimedThisSessionRef = useRef(new Set());
@@ -151,6 +152,11 @@ export default function BadgeModal() {
         document.body.style.overflow = '';
       };
     }
+  }, [selectedBadge]);
+
+  // Reset zoom state when badge changes
+  useEffect(() => {
+    setIsImageZoomed(false);
   }, [selectedBadge]);
 
   // Scroll to honor system buttons when they appear
@@ -317,16 +323,19 @@ export default function BadgeModal() {
                 }
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <div
+                <motion.div
                   ref={badgeTargetRef}
-                  className="w-48 h-48 badge-image-container overflow-hidden"
+                  className="w-48 h-48 badge-image-container overflow-hidden cursor-pointer"
+                  onClick={() => setIsImageZoomed(true)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <img
                     src={selectedBadge.image}
                     alt={selectedBadge.name}
                     className="w-full h-full object-cover"
                   />
-                </div>
+                </motion.div>
               </motion.div>
 
               {/* Badge type & time pills */}
@@ -522,6 +531,33 @@ export default function BadgeModal() {
               onAnimationComplete={handleFloatingComplete}
             />
           )}
+
+          {/* Image Zoom Lightbox */}
+          <AnimatePresence>
+            {isImageZoomed && (
+              <>
+                {/* Lightbox backdrop */}
+                <motion.div
+                  className="fixed inset-0 bg-earth-900/95 z-[60] flex items-center justify-center p-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setIsImageZoomed(false)}
+                >
+                  {/* Zoomed image */}
+                  <motion.img
+                    src={selectedBadge.image}
+                    alt={selectedBadge.name}
+                    className="max-w-full max-h-full object-contain cursor-pointer"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    transition={springs.smooth}
+                  />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </>
       )}
     </AnimatePresence>

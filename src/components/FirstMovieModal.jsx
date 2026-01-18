@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useApp } from '../context/AppContext';
@@ -6,6 +6,7 @@ import { scaleIn, springs } from '../utils/animations';
 
 export default function FirstMovieModal() {
   const { showFirstMovieModal, closeFirstMovieModal } = useApp();
+  const [isImageZoomed, setIsImageZoomed] = useState(false);
 
   // Fire confetti when modal opens
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function FirstMovieModal() {
             >
               {/* Header */}
               <motion.h2
-                className="font-display text-2xl font-bold text-gold-600 mb-4"
+                className="font-display text-2xl font-bold text-gold-600 mb-6"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
@@ -77,10 +78,13 @@ export default function FirstMovieModal() {
 
               {/* Badge image */}
               <motion.div
-                className="w-32 h-32 mx-auto mb-4 badge-image-container overflow-hidden"
+                className="w-64 h-64 mx-auto mb-6 badge-image-container-large overflow-hidden cursor-pointer"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ ...springs.bouncy, delay: 0.3 }}
+                onClick={() => setIsImageZoomed(true)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <img
                   src="/images/badge-intermission-bagel.webp"
@@ -148,6 +152,33 @@ export default function FirstMovieModal() {
               </motion.button>
             </motion.div>
           </motion.div>
+
+          {/* Image Zoom Lightbox */}
+          <AnimatePresence>
+            {isImageZoomed && (
+              <>
+                {/* Lightbox backdrop */}
+                <motion.div
+                  className="fixed inset-0 bg-earth-900/95 z-[60] flex items-center justify-center p-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setIsImageZoomed(false)}
+                >
+                  {/* Zoomed image */}
+                  <motion.img
+                    src="/images/badge-intermission-bagel.webp"
+                    alt="Intermission Bagel"
+                    className="max-w-full max-h-full object-contain cursor-pointer"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    transition={springs.smooth}
+                  />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </>
       )}
     </AnimatePresence>
