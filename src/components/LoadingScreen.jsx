@@ -12,6 +12,7 @@ const SPECIAL_IMAGES = [
   '/images/badge-cheese.webp',
   '/images/ring-badge.png',
   '/images/sophia-matt.png',
+  '/images/pod.png',
 ];
 
 const AUDIO_FILES = [
