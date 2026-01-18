@@ -39,6 +39,9 @@ export function AppProvider({ children }) {
   const [secretUnlockQueue, setSecretUnlockQueue] = useState([]);
   const [secretModalDelayed, setSecretModalDelayed] = useState(false);
 
+  // First movie modal state
+  const [showFirstMovieModal, setShowFirstMovieModal] = useState(false);
+
   // Derive the current modal to show (first in queue, unless delayed)
   const secretUnlockModal = !secretModalDelayed ? secretUnlockQueue[0] || null : null;
 
@@ -119,9 +122,21 @@ export function AppProvider({ children }) {
     setShowScheduleSheet(false);
   }, [play]);
 
+  const closeFirstMovieModal = useCallback(() => {
+    play(UI_SOUNDS.modalClose);
+    setShowFirstMovieModal(false);
+  }, [play]);
+
   const claimBadgeWithSound = useCallback((badgeId, options = {}) => {
     storage.claimBadge(badgeId, options);
     play(UI_SOUNDS.badgeClaim);
+
+    // Trigger first movie modal 1s after claiming fellowship badge
+    if (badgeId === 'fellowship') {
+      setTimeout(() => {
+        setShowFirstMovieModal(true);
+      }, 1000);
+    }
   }, [storage, play]);
 
   const resetAndStartOver = useCallback(() => {
@@ -164,6 +179,10 @@ export function AppProvider({ children }) {
     isSecretUnlocked,
     secretUnlockModal,
     closeSecretUnlockModal,
+
+    // First movie modal
+    showFirstMovieModal,
+    closeFirstMovieModal,
 
     // Reset
     resetAndStartOver,
