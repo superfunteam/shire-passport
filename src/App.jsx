@@ -8,6 +8,7 @@ import Passport from './components/Passport';
 import BadgeModal from './components/BadgeModal';
 import CertificationModal from './components/CertificationModal';
 import SecretUnlockModal from './components/SecretUnlockModal';
+import FirstMovieModal from './components/FirstMovieModal';
 import ScheduleSheet from './components/ScheduleSheet';
 import RainEffect from './components/RainEffect';
 
@@ -28,6 +29,7 @@ function AppContent() {
       <BadgeModal />
       <CertificationModal />
       <SecretUnlockModal />
+      <FirstMovieModal />
       <ScheduleSheet />
     </div>
   );
