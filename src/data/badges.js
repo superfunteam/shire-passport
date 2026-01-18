@@ -55,7 +55,7 @@ export const badges = [
     id: 'you-shall-not-pass',
     type: BADGE_TYPES.SCENE,
     name: '"You Shall Not Pass"',
-    time: '11:27am ish',
+    time: '11:28am ish',
     shortDesc: 'Gandalf faces the Balrog',
     longDesc: 'Upon the Bridge of Khazad-dûm, Gandalf the Grey makes his stand against shadow and flame. "You. Shall. Not. Pass!"',
     instruction: 'Watch this scene to claim this badge.',
