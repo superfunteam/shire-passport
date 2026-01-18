@@ -42,6 +42,9 @@ export function AppProvider({ children }) {
   // First movie modal state
   const [showFirstMovieModal, setShowFirstMovieModal] = useState(false);
 
+  // Second movie modal state
+  const [showSecondMovieModal, setShowSecondMovieModal] = useState(false);
+
   // Derive the current modal to show (first in queue, unless delayed)
   const secretUnlockModal = !secretModalDelayed ? secretUnlockQueue[0] || null : null;
 
@@ -127,6 +130,11 @@ export function AppProvider({ children }) {
     setShowFirstMovieModal(false);
   }, [play]);
 
+  const closeSecondMovieModal = useCallback(() => {
+    play(UI_SOUNDS.modalClose);
+    setShowSecondMovieModal(false);
+  }, [play]);
+
   const claimBadgeWithSound = useCallback((badgeId, options = {}) => {
     storage.claimBadge(badgeId, options);
     play(UI_SOUNDS.badgeClaim);
@@ -135,6 +143,13 @@ export function AppProvider({ children }) {
     if (badgeId === 'fellowship') {
       setTimeout(() => {
         setShowFirstMovieModal(true);
+      }, 1000);
+    }
+
+    // Trigger second movie modal 1s after claiming two-towers badge
+    if (badgeId === 'two-towers') {
+      setTimeout(() => {
+        setShowSecondMovieModal(true);
       }, 1000);
     }
   }, [storage, play]);
@@ -189,6 +204,10 @@ export function AppProvider({ children }) {
     // First movie modal
     showFirstMovieModal,
     closeFirstMovieModal,
+
+    // Second movie modal
+    showSecondMovieModal,
+    closeSecondMovieModal,
 
     // Reset
     resetAndStartOver,

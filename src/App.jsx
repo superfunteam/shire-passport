@@ -9,6 +9,7 @@ import BadgeModal from './components/BadgeModal';
 import CertificationModal from './components/CertificationModal';
 import SecretUnlockModal from './components/SecretUnlockModal';
 import FirstMovieModal from './components/FirstMovieModal';
+import SecondMovieModal from './components/SecondMovieModal';
 import ScheduleSheet from './components/ScheduleSheet';
 import UpdatePrompt from './components/UpdatePrompt';
 import RainEffect from './components/RainEffect';
@@ -31,6 +32,7 @@ function AppContent() {
       <CertificationModal />
       <SecretUnlockModal />
       <FirstMovieModal />
+      <SecondMovieModal />
       <ScheduleSheet />
     </div>
   );
