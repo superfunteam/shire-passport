@@ -7,6 +7,13 @@ import { badges } from '../data/badges';
 // All assets to preload
 const BADGE_IMAGES = badges.map(b => b.image);
 const LOCK_IMAGES = ['/images/badge-lock.png', '/images/badge-lock-ring.png'];
+const SPECIAL_IMAGES = [
+  '/images/badge-intermission-bagel.webp',
+  '/images/badge-cheese.webp',
+  '/images/ring-badge.png',
+  '/images/sophia-matt.png',
+  '/images/pod.png',
+];
 
 const AUDIO_FILES = [
   // Badge sounds
@@ -26,7 +33,7 @@ const AUDIO_FILES = [
   '/audio/bg-night-2.mp3',
 ];
 
-const ALL_IMAGES = [...BADGE_IMAGES, ...LOCK_IMAGES];
+const ALL_IMAGES = [...BADGE_IMAGES, ...LOCK_IMAGES, ...SPECIAL_IMAGES];
 
 // Preload a single image
 function preloadImage(src) {
