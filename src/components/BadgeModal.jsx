@@ -356,6 +356,19 @@ export default function BadgeModal() {
               {/* Badge description */}
               <p className="font-body text-earth-600 text-center mb-4 leading-relaxed text-xl">
                 {selectedBadge.longDesc}
+                {selectedBadge.id === 'secret-movies' && (
+                  <span
+                    style={{
+                      display: 'block',
+                      marginTop: '0.5rem',
+                      color: '#7C3AED',
+                      fontFamily: "'Google Sans Flex', sans-serif",
+                      fontWeight: 500,
+                    }}
+                  >
+                    The Pod salutes you!
+                  </span>
+                )}
               </p>
 
               {/* Instruction text */}
