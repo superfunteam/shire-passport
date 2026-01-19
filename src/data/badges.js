@@ -232,7 +232,7 @@ export const badges = [
     type: BADGE_TYPES.SECRET,
     name: 'Ringbearer',
     shortDesc: 'The ultimate achievement',
-    longDesc: 'You bore the weight of this quest to the very end. The fate of Middle-earth was in your hands, and you did not falter. Even the smallest person can change the course of the future.',
+    longDesc: 'You bore the weight of this quest to the very end. The fate of Middle-earth was in your hands, and you did not falter. Even the smallest person can change the course of the future. Mitzi was never quiet.',
     image: '/images/badge-secret-ringbearer.webp',
     order: 20,
     unlockCondition: {
